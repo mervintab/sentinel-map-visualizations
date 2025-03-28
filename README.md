@@ -8,6 +8,11 @@ This repository contains custom map visualizations for use in **Microsoft Sentin
 
 ### 🔹 `signinlogs_map.json`
 
+- [`signinlogs_map.json`](maps/signinlogs_map.json) — Successful login heatmap
+- [`failedlogins_map.json`](maps/failedlogins_map.json) — Failed login heatmap
+- [`maliciousflows_map.json`](maps/maliciousflows_map.json) — Malicious network flow visualization
+
+
 **Purpose**:  
 Displays successful login activity (ResultType = 0) from Azure Active Directory `SigninLogs`, showing a heatmap based on login counts by location.
 

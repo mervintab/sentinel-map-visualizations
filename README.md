@@ -9,7 +9,7 @@ This repository contains custom map visualizations for use in **Microsoft Sentin
 - [`signinlogs_map.json`](maps/signinlogs_map.json) — Successful login heatmap
 - [`failedlogins_map.json`](maps/failedlogins_map.json) — Failed login heatmap
 - [`maliciousflows_map.json`](maps/maliciousflows_map.json) — Malicious network flow visualization
-- [`resourcecreation_map.json`](maps/resourcecreation_map.json) - Resource Creation 
+- [`resourcecreation_map.json`](maps/resourcecreation_map.json) - Successful Azure Resource creation events Map
 
 
 ---

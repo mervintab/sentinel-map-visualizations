@@ -9,6 +9,8 @@ This repository contains custom map visualizations for use in **Microsoft Sentin
 - [`signinlogs_map.json`](maps/signinlogs_map.json) — Successful login heatmap
 - [`failedlogins_map.json`](maps/failedlogins_map.json) — Failed login heatmap
 - [`maliciousflows_map.json`](maps/maliciousflows_map.json) — Malicious network flow visualization
+- [`resourcecreation_map.json`](maps/resourcecreation_map.json) - Resource Creation 
+
 
 ---
 
@@ -91,7 +93,37 @@ MaliciousFlows
          city = cityname, country = countryname,
          friendly_location = strcat(cityname, " (", countryname, ")")
 ```
+### 🔹 [`resourcecreation_map.json`](maps/resourcecreation_map.json)
 
+**Purpose**:  
+This map visualizes **successful Azure resource creation events** by public IP address, enriched with location data using a custom `geoip` watchlist. It is useful for identifying geographic patterns in deployment activity and spotting suspicious or unexpected regions of origin.
+
+**Features**:
+- Filters out system accounts and focuses on named users or service principals
+- Includes only successful `WRITE` operations (i.e., actual resource creation)
+- Performs IP enrichment using a custom `geoip` watchlist
+- Labels map points with `CallerPrefix - City, Country`
+- Uses a heatmap to reflect the number of resources created from each location
+
+**KQL Summary**:
+```kql
+let GeoIPDB_FULL = _GetWatchlist("geoip");
+let AzureActivityRecords = AzureActivity
+| where not(Caller matches regex @guid_regex)
+| where CallerIpAddress matches regex @"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b"
+| where OperationNameValue endswith "WRITE"
+  and (ActivityStatusValue == "Success" or ActivityStatusValue == "Succeeded")
+| summarize ResouceCreationCount = count() by Caller, CallerIpAddress;
+AzureActivityRecords
+| evaluate ipv4_lookup(GeoIPDB_FULL, CallerIpAddress, network)
+| project Caller,
+         CallerPrefix = split(Caller, "@")[0],
+         CallerIpAddress,
+         ResouceCreationCount,
+         Country = countryname,
+         Latitude = latitude,
+         Longitude = longitude,
+         friendly_label = strcat(split(Caller, "@")[0], " - ", cityname, ", ", countryname)
 ---
 
 ## 🚀 How to Use

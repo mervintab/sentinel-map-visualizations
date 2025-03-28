@@ -9,8 +9,8 @@ This repository contains custom map visualizations for use in **Microsoft Sentin
 ### 🔹 `signinlogs_map.json`
 
 - [`signinlogs_map.json`](maps/signinlogs_map.json) — Successful login heatmap
-- [`failedlogins_map.json`](maps/failedlogins_map.json) — Failed login heatmap
-- [`maliciousflows_map.json`](maps/maliciousflows_map.json) — Malicious network flow visualization
+
+
 
 
 **Purpose**:  
@@ -18,7 +18,7 @@ Displays successful login activity (ResultType = 0) from Azure Active Directory 
 
 
 ### 🔹 `failedlogins_map.json`
-
+- [`failedlogins_map.json`](maps/failedlogins_map.json) — Failed login heatmap
 **Purpose**:  
 This map visualization displays **failed sign-in attempts** (i.e., `ResultType != 0`) captured from Azure AD `SigninLogs` over the past 30 days. It helps identify **geographic patterns of unsuccessful login activity**, which may indicate brute-force attacks, password spray attempts, or unauthorized access efforts.
 
@@ -27,6 +27,18 @@ This map visualization displays **failed sign-in attempts** (i.e., `ResultType !
 - Colored and sized by `LoginCount`
 - Green to red palette based on login failure volume
 - Location-based aggregation
+
+### 🔹 [`maliciousflows_map.json`](maps/maliciousflows_map.json)
+- [`maliciousflows_map.json`](maps/maliciousflows_map.json) — Malicious network flow visualization
+**Purpose**:  
+This map visualizes **malicious network flows** detected by `AzureNetworkAnalytics_CL`, enriched with IP geolocation data from a custom **GeoIP watchlist** (`geoip`). It provides a geographic view of potential attacker infrastructure or anomalous traffic sources over a 30-day window.
+
+**Features**:
+- Uses `ipv4_lookup()` to match malicious source IPs with geolocation data
+- Displays heatmap by **city** using `latitude` and `longitude`
+- Aggregates color and size based on city-level traffic volume
+- Labels each point with a **friendly location** (`City (Country)`)
+- Highlights high-density areas using a green-to-red heatmap
 
 ---
 

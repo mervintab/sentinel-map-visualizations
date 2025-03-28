@@ -61,7 +61,6 @@ SigninLogs
 | project Identity, Latitude, Longitude, City, Country, LoginCount,
     friendly_label = strcat(Identity, " - ", City, ", ", Country)
 ```
-
 ---
 
 ### 🔹 [`maliciousflows_map.json`](maps/maliciousflows_map.json)

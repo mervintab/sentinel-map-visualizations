@@ -125,6 +125,34 @@ AzureActivityRecords
          Longitude = longitude,
          friendly_label = strcat(split(Caller, "@")[0], " - ", cityname, ", ", countryname)
 ---
+### 🔹 [`failedlogon_remoteip_map.json`](maps/failedlogon_remoteip_map.json)
+
+**Purpose**:  
+This map visualizes **failed logon attempts** from remote IP addresses, using data from `DeviceLogonEvents`. It enriches IPs with location data from the `geoip` watchlist and displays a heatmap based on the number of failed attempts over a 30-day period.
+
+**Features**:
+- Filters for logon failures (`ActionType == "LogonFailed"`)
+- Enriches `RemoteIP` with city and country information using `ipv4_lookup()`
+- Summarizes failed logon counts by location
+- Uses heatmap coloring and size scaling based on number of attempts
+- Labels points with the format: `City (Country)`
+
+**KQL Summary**:
+```kql
+let GeoIPDB_FULL = _GetWatchlist("geoip");
+DeviceLogonEvents
+| where ActionType == "LogonFailed"
+| order by TimeGenerated desc
+| evaluate ipv4_lookup(GeoIPDB_FULL, RemoteIP, network)
+| summarize LoginAttempts = count() by 
+    RemoteIP, 
+    City = cityname, 
+    Country = countryname, 
+    friendly_location = strcat(cityname, " (", countryname, ")"), 
+    Latitude = latitude, 
+    Longitude = longitude;
+```
+
 
 ## 🚀 How to Use
 

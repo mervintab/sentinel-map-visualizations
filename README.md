@@ -6,8 +6,8 @@ This repository contains custom map visualizations for use in **Microsoft Sentin
 
 ## 📁 Contents
 
-- [`signinlogs_map.json`](maps/signinlogs_map.json) — Successful login heatmap (Entra ID (Azure) Authentication Success
-- [`failedlogins_map.json`](maps/failedlogins_map.json) — Failed login heatmap (ENtra ID (Azure) Authentication Success
+- [`signinlogs_map.json`](maps/signinlogs_map.json) — Successful login heatmap (Entra ID (Azure) Authentication Success)
+- [`failedlogins_map.json`](maps/failedlogins_map.json) — Failed login heatmap (Entra ID (Azure) Authentication Failures)
 - [`maliciousflows_map.json`](maps/maliciousflows_map.json) — Malicious network flow visualization (Malicious Traffic Entering the Network)
 - [`resourcecreation_map.json`](maps/resourcecreation_map.json) — Resource creation activity by IP (Azure Resource Creation)
 - [`failedlogon_remoteip_map.json`](maps/failedlogon_remoteip_map.json) — Remote IP failed logon attempts (VM Authentication Failures)

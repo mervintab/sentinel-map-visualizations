@@ -9,8 +9,8 @@ This repository contains custom map visualizations for use in **Microsoft Sentin
 - [`signinlogs_map.json`](maps/signinlogs_map.json) — Successful login heatmap
 - [`failedlogins_map.json`](maps/failedlogins_map.json) — Failed login heatmap
 - [`maliciousflows_map.json`](maps/maliciousflows_map.json) — Malicious network flow visualization
-- [`resourcecreation_map.json`](maps/resourcecreation_map.json) - Successful Azure Resource creation events Map
-
+- [`resourcecreation_map.json`](maps/resourcecreation_map.json) — Resource creation activity by IP
+- [`failedlogon_remoteip_map.json`](maps/failedlogon_remoteip_map.json) — Remote IP failed logon attempts
 
 ---
 
@@ -63,6 +63,7 @@ SigninLogs
 | project Identity, Latitude, Longitude, City, Country, LoginCount,
     friendly_label = strcat(Identity, " - ", City, ", ", Country)
 ```
+
 ---
 
 ### 🔹 [`maliciousflows_map.json`](maps/maliciousflows_map.json)
@@ -93,6 +94,9 @@ MaliciousFlows
          city = cityname, country = countryname,
          friendly_location = strcat(cityname, " (", countryname, ")")
 ```
+
+---
+
 ### 🔹 [`resourcecreation_map.json`](maps/resourcecreation_map.json)
 
 **Purpose**:  
@@ -124,7 +128,10 @@ AzureActivityRecords
          Latitude = latitude,
          Longitude = longitude,
          friendly_label = strcat(split(Caller, "@")[0], " - ", cityname, ", ", countryname)
+```
+
 ---
+
 ### 🔹 [`failedlogon_remoteip_map.json`](maps/failedlogon_remoteip_map.json)
 
 **Purpose**:  
@@ -153,6 +160,7 @@ DeviceLogonEvents
     Longitude = longitude;
 ```
 
+---
 
 ## 🚀 How to Use
 
